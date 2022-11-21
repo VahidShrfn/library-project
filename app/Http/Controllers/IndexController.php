@@ -9,36 +9,27 @@ use App\Models\user_fav as Modelsuser_fav;
 use App\Models\rocommend as Modelrecommendation;
 use App\libusers;
 use App\Models\user_fav;
+use Error;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
     public function index() {
 
-
-        
         if(request('logout')==1){
             Session::put('login',0);
             Session::put('userID',null);
         }
 
-
-
         $books=  ModelsBooks::all();
-
-        //print_r($books);
-
         return view('welcome',['books'=>$books]);
-
-
-
     }
     
     public function newBooks(){
         
         $books=  ModelsBooks::all();
-
         return view('newBooks', ['books'=>$books]);
 
     }
@@ -46,8 +37,26 @@ class IndexController extends Controller
     public function suggestion(){
 
         $books=  ModelsBooks::all();
+        return view('newBooks', ['books'=>$books]);
+        $check=0;
+        $tablenum=count($books);
+        while($check==0){
+            $n1=rand('1', $tablenum);
+            $n2=rand('1', $tablenum);
+            $n3=rand('1', $tablenum);
+            if($n1!=$n2 && $n1!=$n3 && $n2!=$n3){
+                $check=1;
+            }
+        }
+        $row1=ModelsBooks::where('id',$n1)->first();
+        $row2=ModelsBooks::where('id',$n2)->first();
+        $row3=ModelsBooks::where('id',$n3)->first();
+        print_r($row1);
+        print_r($row2);
+        print_r($row3);
+        
 
-        return view('suggestion', ['books'=>$books]);
+
 
     }
 

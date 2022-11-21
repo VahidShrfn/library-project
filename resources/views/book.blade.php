@@ -27,8 +27,8 @@
         </div>
 
         <div class="swiper books-slider">
-            <div class="swiper-wrapper">
-                <a class="swiper-slide"><img src="{{ $book-> first_page}}" alt=""></a>
+            <div>
+                <a><img src="{{ $book-> first_page}}" alt=""></a>
             </div>
             <img src="image/stand.png" class="stand" alt="">
         </div>
